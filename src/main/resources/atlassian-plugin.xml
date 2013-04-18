@@ -1,0 +1,21 @@
+<atlassian-plugin key="${project.groupId}.${project.artifactId}" 
+	name="subtasker" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+    </plugin-info>
+
+    <!-- add our i18n resource -->
+    <resource type="i18n" name="i18n" location="subtasker"/>
+    
+    <!-- add our web resources -->
+    <web-resource key="subtasker-resources" name="subtasker Web Resources">
+        <dependency>com.atlassian.auiplugin:ajs</dependency>
+        <resource type="download" name="subtasker.css" location="/css/subtasker.css"/>
+        <resource type="download" name="subtasker.js" location="/js/subtasker.js"/>
+        <resource type="download" name="images/" location="/images"/>
+        <context>subtasker</context>
+    </web-resource>
+        
+</atlassian-plugin>
