@@ -1,4 +1,4 @@
-<atlassian-plugin key="${project.groupId}.${project.artifactId}" 
+<atlassian-plugin key="ca.appbox.jira.subtasker" 
 	name="subtasker" plugins-version="2">
     <plugin-info>
         <description>${project.description}</description>
@@ -15,7 +15,14 @@
         <resource type="download" name="subtasker.css" location="/css/subtasker.css"/>
         <resource type="download" name="subtasker.js" location="/js/subtasker.js"/>
         <resource type="download" name="images/" location="/images"/>
-        <context>subtasker</context>
     </web-resource>
         
+    <web-item key="subtasker-create-sub-tasks-web-item" name="Subtasker create sub-tasks link" 
+    		  section="operations-subtasks" weight="10">
+        <description key="subtasker-web-item-description">Create sub-tasks</description>
+        <label key="ca.appbox.jira.plugins.subtasker.create.subtask.webitem" />
+        <link linkId="subtasker-web-item-link">
+        	$webResourceManager.requireResource("ca.appbox.jira.subtasker:subtasker-resources");
+        </link>
+    </web-item>
 </atlassian-plugin>
