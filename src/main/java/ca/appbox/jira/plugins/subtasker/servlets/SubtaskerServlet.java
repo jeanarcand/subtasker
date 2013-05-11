@@ -1,19 +1,14 @@
 package ca.appbox.jira.plugins.subtasker.servlets;
 
 import java.io.IOException;
-import java.util.Collection;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.ofbiz.core.entity.GenericEntityException;
-
 import ca.appbox.jira.plugins.subtasker.servlets.response.SubtaskTemplateListResponseBuilder;
 
-import com.atlassian.jira.issue.Issue;
 import com.atlassian.jira.issue.IssueManager;
 import com.google.gson.Gson;
 
@@ -28,7 +23,7 @@ public class SubtaskerServlet extends HttpServlet {
 
 	private IssueManager issueManager;
 
-	private Gson gson;
+	private Gson gson = new Gson();
 	
 	public SubtaskerServlet(IssueManager issueManager) {
 		super();
@@ -42,7 +37,7 @@ public class SubtaskerServlet extends HttpServlet {
 		SubtaskTemplateListResponseBuilder subtaskTemplateListResponseBuilder = 
 				new SubtaskTemplateListResponseBuilder(issueManager);
 		
-		String response = gson.toJson(subtaskTemplateListResponseBuilder.buildResponseFromProjectId(1000L));
+		String response = gson.toJson(subtaskTemplateListResponseBuilder.buildResponseFromProjectId(10000L));
 		
 		resp.getWriter().write(response);
 	}

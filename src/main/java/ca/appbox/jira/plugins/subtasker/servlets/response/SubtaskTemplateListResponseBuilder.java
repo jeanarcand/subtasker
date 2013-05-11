@@ -2,12 +2,14 @@ package ca.appbox.jira.plugins.subtasker.servlets.response;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import org.ofbiz.core.entity.GenericEntityException;
 
 import com.atlassian.jira.issue.Issue;
 import com.atlassian.jira.issue.IssueManager;
+import com.atlassian.jira.issue.MutableIssue;
 
 public class SubtaskTemplateListResponseBuilder {
 
@@ -24,17 +26,19 @@ public class SubtaskTemplateListResponseBuilder {
 		SubtaskTemplateListResponse response = new SubtaskTemplateListResponse();
 		
 		try {
-			templateIssuesIds = issueManager.getIssueIdsForProject(1000L);
+			templateIssuesIds = issueManager.getIssueIdsForProject(projectId);
 		} catch (GenericEntityException e) {
 			//handle me
 		}
 		
-		List<Issue> templateIssues = issueManager.getIssueObjects(templateIssuesIds);
-
-		for (Issue currentTemplateIssue : templateIssues) {
+		Iterator<Long> templateIssuesIdsIter = templateIssuesIds.iterator();
+		
+		while (templateIssuesIdsIter.hasNext()) {
+			Long currentTemplateIssueId = templateIssuesIdsIter.next();
+			MutableIssue currentTemplateIssue = issueManager.getIssueObject(currentTemplateIssueId);
 			SubtaskTemplate currentTemplate = new SubtaskTemplate(currentTemplateIssue.getKey(),
 					currentTemplateIssue.getSummary());
-			response.addSubtaskTemplate(currentTemplate);
+			response.addSubtaskTemplate(currentTemplate);			
 		}
 		
 		return response;
