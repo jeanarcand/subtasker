@@ -23,4 +23,11 @@
         <label key="ca.appbox.jira.plugins.subtasker.create.subtask.webitem" />
         <link linkId="subtasker-web-item-link">$webResourceManager.requireResource("ca.appbox.jira.subtasker:subtasker-resources");</link>
     </web-item>
+    
+   	<servlet name="Subtasker Template Servlet" 
+		key="subtasker-template-servlet"
+		class="ca.appbox.jira.plugins.subtasker.servlets.SubtaskerServlet">
+		<url-pattern>/subtasker-template-servlet</url-pattern>
+	</servlet>
+    
 </atlassian-plugin>
