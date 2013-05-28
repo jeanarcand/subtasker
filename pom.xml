@@ -7,37 +7,31 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ca.appbox.jira</groupId>
     <artifactId>subtasker</artifactId>
-    <version>0.1.1-jira4</version>
+    <version>0.1.1-jira5</version>
 
     <organization>
         <name>Solutions Appbox inc.</name>
         <url>http://www.appbox.ca/</url>
     </organization>
 
-    <name>Subtasker</name>
-    <description>Sub-tasks creation add-on for Atlassian Jira.</description>
+    <name>subtasker</name>
+    <description>Sub-task creation add-on for Atlassian Jira.</description>
     <packaging>atlassian-plugin</packaging>
 
     <dependencies>
         <dependency>
             <groupId>com.atlassian.jira</groupId>
-            <artifactId>atlassian-jira</artifactId>
+            <artifactId>jira-api</artifactId>
             <version>${jira.version}</version>
             <scope>provided</scope>
-        </dependency>        
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.10</version>
             <scope>test</scope>
         </dependency>
-		<dependency>
-		    <groupId>com.atlassian.sal</groupId>
-		    <artifactId>sal-api</artifactId>
-		    <version>2.0.0</version>
-		    <scope>provided</scope>
-		</dependency>
-		
+
         <!-- WIRED TEST RUNNER DEPENDENCIES -->
         <dependency>
             <groupId>com.atlassian.plugins</groupId>
@@ -51,16 +45,10 @@
             <version>1.1.1</version>
             <scope>provided</scope>
         </dependency>
-		<dependency>
-        	<groupId>javax.servlet</groupId>
-        	<artifactId>servlet-api</artifactId>
-        	<version>2.3</version>
-        	<scope>provided</scope>
-		</dependency>
-		<dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <version>2.2.2-atlassian-1</version>
+        <dependency>
+        	<groupId>com.google.code.gson</groupId>
+        	<artifactId>gson</artifactId>
+        	<version>2.2.3</version>
         </dependency>
     </dependencies>
 
@@ -73,7 +61,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <productVersion>${jira.version}</productVersion>
-                    <productDataVersion>${jira.data.version}</productDataVersion>
+                    <productDataVersion>${jira.version}</productDataVersion>
                 </configuration>
             </plugin>
             <plugin>
@@ -87,9 +75,9 @@
     </build>
 
     <properties>
-        <jira.version>4.1.1</jira.version>
-        <jira.data.version>4.4</jira.data.version>
+        <jira.version>5.1.8</jira.version>
         <amps.version>4.1.6</amps.version>
         <plugin.testrunner.version>1.1.1</plugin.testrunner.version>
     </properties>
+
 </project>

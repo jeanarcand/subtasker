@@ -77,9 +77,9 @@ public class SubtaskerCreateSubtasksAction extends JiraWebActionSupport {
 			Issue currentSubtaskToCreate = templateIssueSubtasksIter.next();
 			MutableIssue newSubtask = issueFactory.getIssue();
 			
-			newSubtask.setProjectId(currentSubtaskToCreate.getProjectObject().getId());
+			newSubtask.setProjectId(currentIssueObject.getProjectObject().getId());
 			newSubtask.setIssueTypeId(currentSubtaskToCreate.getIssueTypeObject().getId());
-			newSubtask.setParentId(currentSubtaskToCreate.getId());
+			newSubtask.setParentId(currentIssueObject.getId());
 			newSubtask.setSummary(currentSubtaskToCreate.getSummary());
 			newSubtask.setAssignee(currentSubtaskToCreate.getAssignee());
 			newSubtask.setDescription(currentSubtaskToCreate.getDescription());

@@ -13,8 +13,8 @@ function show_subtask_popup() {
 	popup.addButton("", function() {submit_subtask_creation_form();}, "subtasker-popup-create-sub-tasks-button");
 
 	AJS.$.get(contextPath + "/SubtaskerListTemplates.jspa", function(data) {
-		AJS.$("#subtasker-dialog .page-menu").attr("style", "width:0%;height:100%;margin:0;padding:0;");
-		AJS.$("#subtasker-dialog .page-body").html(data);
+		AJS.$("#subtasker-dialog .dialog-page-menu").attr("style", "width:0%;height:100%;margin:0;padding:0;");
+		AJS.$("#subtasker-dialog .dialog-page-body").html(data);
 		popup.show();
 	});
 }
@@ -32,7 +32,7 @@ function submit_subtask_creation_form() {
         data: form.serialize(),
         url: contextPath + "/SubtaskerCreateSubtasks.jspa",
 	        success: function(data) {
-	        	AJS.$("#subtasker-dialog .page-body").html(data);
+	        	AJS.$("#subtasker-dialog .dialog-page-body").html(data);
 	        }
 		});
 }
