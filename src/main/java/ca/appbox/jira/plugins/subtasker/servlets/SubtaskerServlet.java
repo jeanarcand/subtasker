@@ -40,5 +40,6 @@ public class SubtaskerServlet extends HttpServlet {
 		String response = gson.toJson(subtaskTemplateListResponseBuilder.buildResponseFromProjectId(10000L));
 		
 		resp.getWriter().write(response);
+
 	}
 }

@@ -1,0 +1,56 @@
+<form id="subtasker-popup-form">
+	#if ($action.hasAnyErrors())
+	    #foreach ($error in $action.getErrorMessages())
+	    	<span class="errMsg">$error</span>
+	    #end
+	#end
+	<table class="jiraform maxWidth">
+    	<tbody>
+    	
+		 	#if($action.getHasErrors())
+                #set($err = $action.getErrors())
+            #end
+ 
+            #macro( errortablerow $errors $key)
+                #if ($errors && $errors.get($key))
+                    <tr>
+                        <td class="formErrors" width="40%">&nbsp;</td>
+                        <td valign="top" class="formErrors">
+                            <span class="errMsg">$errors.get($key)</span>
+                        </td>
+                    </tr>
+                #end
+            #end
+                    
+            #errortablerow( $err "templateIssue" )     	
+    	
+            <tr>
+        		<td class="fieldLabelArea" width="40%">
+    				$i18n.getText("ca.appbox.jira.plugins.subtasker.create.subtask.form.template.field")
+				</td>
+        		<td class="fieldValueArea" bgcolor="#ffffff">
+	        		<select name="templateIssue">
+        				#foreach ($templateIssue in $action.getTemplateIssues())
+        					<option value="$templateIssue.getId()">$templateIssue.getKey() - $templateIssue.getSummary()</option>
+						#end
+					</select>
+					<input type="hidden" id="subtasker-current-issue-id" name="currentIssueId">
+					<input type="hidden" name="submitted" value="true">
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</form>
+
+<script>
+	AJS.$(document).ready(function() {
+		AJS.$(".subtasker-popup-title").html("$i18n.getText("ca.appbox.jira.plugins.subtasker.create.subtask.popup.title")");
+		AJS.$(".subtasker-popup-cancel-button").html('$i18n.getText("ca.appbox.jira.plugins.subtasker.create.subtask.form.cancel")');
+		AJS.$(".subtasker-popup-create-sub-tasks-button").html('$i18n.getText("ca.appbox.jira.plugins.subtasker.create.subtask.form.create")');
+		AJS.$('select[name="templateIssue"] > option').each(function () {
+		    var text=AJS.$(this).text()
+			if (text.length>40)
+				AJS.$(this).html(text.substr(0,40)+'...')
+		});
+	});
+</script>

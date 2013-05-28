@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <title>$i18n.getText("ca.appbox.jira.plugins.subtasker.administration.title")</title>
+        <meta name="decorator" content="atl.admin" />
+    </head>
+    <body>
+        <form method="POST" action="$req.getContextPath()/secure/SubtaskerAdministration.jspa">
+			<table class="jiraform maxWidth">
+	        	<tbody>
+	        		<tr>
+				        <td class="jiraformheader" colspan="2">
+				             <h3 class="formtitle">$i18n.getText("ca.appbox.jira.plugins.subtasker.administration.form.title")</h3>
+				        </td>
+	    			</tr>
+	    			
+    			    #if($action.getHasErrors())
+                        #set($err = $action.getErrors())
+                    #end
+ 
+                    #macro( errortablerow $errors $key)
+                        #if ($errors && $errors.get($key))
+                            <tr>
+                                <td class="formErrors" width="15%">&nbsp;</td>
+                                <td valign="top" class="formErrors">
+                                    <span class="errMsg">$errors.get($key)</span>
+                                </td>
+                            </tr>
+                        #end
+                    #end
+                    
+                    #set($name = $action.getTemplateProjectKey())
+                    #set($value = $action.getTemplateProjectKey())
+                         
+                    #errortablerow( $err "templateProjectKey" ) 
+	    			
+	                <tr>
+	            		<td #if($err && $err.get("templateProjectKey")) class="fieldLabelArea formErrors" #else class="fieldLabelArea" #end width="15%">
+	        				$i18n.getText("ca.appbox.jira.plugins.subtasker.administration.form.template.project.key.field")
+	        				<span class="icon icon-required"><span>$i18n.getText("general.field.required")</span></span>
+	    				</td>
+	            		<td #if($err && $err.get("templateProjectKey")) class="fieldValueArea formErrors" #else class="fieldValueArea" #end bgcolor="#ffffff">
+	            			<input type="text" name="templateProjectKey" size="50" value="$templateProjectKey"> <br>
+	            			<font size="1">$i18n.getText("ca.appbox.jira.plugins.subtasker.administration.form.template.project.key.field.tip")</font>
+	    				</td>
+	    			</tr>
+	        		<!-- buttons -->
+	        		<tr>
+	           			<td colspan="2">
+			                <center>
+			                    <input type="submit" accesskey="S" value="$i18n.getText("ca.appbox.jira.plugins.subtasker.administration.form.submit")" name="subtasker-config-update">&nbsp;
+			                    <input type="hidden" name="submitted" value="true">
+			                </center>
+	            		</td>
+	        		</tr>
+	    		</tbody>
+	    	</table>
+    	</form>
+    </body>
+</html>

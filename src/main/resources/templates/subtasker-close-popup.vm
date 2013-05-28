@@ -1,0 +1,4 @@
+<script>
+	popup.hide();
+	location.reload(true);
+</script>

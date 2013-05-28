@@ -6,17 +6,21 @@
         <vendor name="${project.organization.name}" url="${project.organization.url}" />
     </plugin-info>
 
-    <!-- add our i18n resource -->
+    <!-- i18n resources -->
     <resource type="i18n" name="i18n" location="subtasker"/>
     
-    <!-- add our web resources -->
+    <!-- web resources -->
     <web-resource key="subtasker-resources" name="subtasker Web Resources">
         <dependency>com.atlassian.auiplugin:ajs</dependency>
+    	<transformation extension="js">
+            <transformer key="jsI18n"/>
+        </transformation> 
         <resource type="download" name="subtasker.css" location="/css/subtasker.css"/>
         <resource type="download" name="subtasker.js" location="/js/subtasker.js"/>
         <resource type="download" name="images/" location="/images"/>
     </web-resource>
-        
+       
+    <!-- create sub-tasks web-item -->
     <web-item key="subtasker-create-sub-tasks-web-item" name="Subtasker create sub-tasks link" 
     		  section="operations-subtasks" weight="10">
         <description key="subtasker-web-item-description">Create sub-tasks</description>
@@ -24,10 +28,36 @@
         <link linkId="subtasker-web-item-link">$webResourceManager.requireResource("ca.appbox.jira.subtasker:subtasker-resources");</link>
     </web-item>
     
+    <!-- administration web-item -->
+   	<web-item key="subtasker-configuration-web-item" name="Subtasker configuration link" section="system.admin/globalsettings" weight="150">
+    	<label key="ca.appbox.jira.plugins.subtasker.administration.webitem"/>
+        <link linkId="subtasker-administration-web-item-link">/secure/SubtaskerAdministration.jspa</link>
+    </web-item>
+    
    	<servlet name="Subtasker Template Servlet" 
 		key="subtasker-template-servlet"
 		class="ca.appbox.jira.plugins.subtasker.servlets.SubtaskerServlet">
 		<url-pattern>/subtasker-template-servlet</url-pattern>
 	</servlet>
-    
+	
+	<webwork1 key="subtasker-configuration" name="subtasker configuration" class="java.lang.Object">
+	    <actions>
+	        <action name="ca.appbox.jira.plugins.subtasker.actions.SubtaskerConfigurationAction" alias="SubtaskerAdministration">
+				<view name="input">/templates/subtasker-configuration.vm</view>
+	            <view name="error">/templates/subtasker-configuration.vm</view>
+	        </action>
+	        <action name="ca.appbox.jira.plugins.subtasker.actions.SubtaskerListTemplatesAction" alias="SubtaskerListTemplates">
+				<view name="input">/templates/subtasker-list-templates.vm</view>
+	            <view name="error">/templates/subtasker-list-templates.vm</view>
+	        </action>	  
+	        <action name="ca.appbox.jira.plugins.subtasker.actions.SubtaskerCreateSubtasksAction" alias="SubtaskerCreateSubtasks">
+				<view name="input">/templates/subtasker-list-templates.vm</view>
+	            <view name="error">/templates/subtasker-list-templates.vm</view>
+	            <view name="close">/templates/subtasker-close-popup.vm</view>
+	        </action>	
+	    </actions>
+	</webwork1>
+	
+	<component-import key="pluginSettingsFactory" interface="com.atlassian.sal.api.pluginsettings.PluginSettingsFactory"/>
+	<component-import key="i18nResolver" interface="com.atlassian.sal.api.message.I18nResolver"/>
 </atlassian-plugin>

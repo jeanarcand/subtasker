@@ -14,8 +14,8 @@
         <url>http://www.appbox.ca/</url>
     </organization>
 
-    <name>subtasker</name>
-    <description>Sub-task creation add-on for Atlassian Jira.</description>
+    <name>Subtasker</name>
+    <description>Sub-tasks creation add-on for Atlassian Jira.</description>
     <packaging>atlassian-plugin</packaging>
 
     <dependencies>
@@ -31,7 +31,13 @@
             <version>4.10</version>
             <scope>test</scope>
         </dependency>
-
+		<dependency>
+		    <groupId>com.atlassian.sal</groupId>
+		    <artifactId>sal-api</artifactId>
+		    <version>2.0.0</version>
+		    <scope>provided</scope>
+		</dependency>
+		
         <!-- WIRED TEST RUNNER DEPENDENCIES -->
         <dependency>
             <groupId>com.atlassian.plugins</groupId>
